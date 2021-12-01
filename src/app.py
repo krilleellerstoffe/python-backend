@@ -15,18 +15,21 @@ app = Flask(__name__)
 def hello():
     # automatically GET, return a list of unicorns
     if request.method == 'GET':
+        unicornsList = storage.fetch_unicorns()
+        unicornsText = []
+        for unicorn in unicornsList:
+            unicornsText.append(unicorn.to_dict())
         if request.headers.get('Accept') == 'application/json':
-            unicornsList = storage.fetch_unicorns()
-            unicornsText = []
-            for unicorn in unicornsList:
-                unicornsText.append(unicorn.to_dict())
             unicornJSON = jsonify(unicornsText)
             return unicornJSON
         else:
-            return "Not JSON"
+            return f"{unicornsText}"
     elif request.method == 'POST':
         newUnicornJSON = request.get_json
-        unicorn = Unicorn(newUnicornJSON)
+        newUnicornAttributes = jsonify(newUnicornJSON)
+        unicorn = Unicorn
+        unicorn.from_db(newUnicornAttributes)
+        storage.add_unicorn(unicorn)
         return "Posted"
     else:
         return "Invalid method"
