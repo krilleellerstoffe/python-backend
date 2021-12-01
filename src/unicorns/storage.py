@@ -43,7 +43,7 @@ def fetch_unicorn(id):
     '''
     Hämtar en specifik enhörning i databasen.
     '''
-    
+
     unicorn = None
     conn = sqlite3.connect('unicorns.db')
     conn.text_factory = str
