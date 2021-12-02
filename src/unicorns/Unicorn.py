@@ -24,7 +24,7 @@ class Unicorn:
         self.spotted_where = Location()
         self.spotted_when = 0
         self.image = ""
-    
+
     def from_db(self, data):
         '''
         Populerar en enhörning med data från en databasförfrågan.

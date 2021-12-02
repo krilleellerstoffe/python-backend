@@ -25,10 +25,7 @@ def hello():
         else:
             return f"{unicornsText}"
     elif request.method == 'POST':
-        newUnicornJSON = request.get_json
-        newUnicornAttributes = jsonify(newUnicornJSON)
-        unicorn = Unicorn
-        unicorn.from_db(newUnicornAttributes)
+        unicorn = json_to_unicorn(request.get_json)
         storage.add_unicorn(unicorn)
         return "Posted"
     else:
@@ -50,4 +47,23 @@ def unicornId(id):
     else:
         return "Invalid method"
 
+def json_to_unicorn(data: dict) -> Unicorn:
+    '''
+    Genom att hantera all JSON -> Unicorn på ett och samma ställe minskar vi
+    risken för fel och kommer undan med lite mindre kod. Funktionen anropas av
+    add_unicorn() och i update_unicorn().
+    '''
     
+    unicorn = Unicorn()
+    if 'id' in data:
+        unicorn.id = data['id']
+    unicorn.name = data['name']
+    unicorn.description = data['description']
+    unicorn.reported_by = data['reportedBy']
+    unicorn.spotted_where.name = data['spottedWhereName']
+    unicorn.spotted_where.lat = data['spottedWhereLat']
+    unicorn.spotted_where.lon = data['spottedWhereLon']
+    unicorn.spotted_when = data['spottedWhen']
+    unicorn.image = data['image']
+    
+    return unicorn
