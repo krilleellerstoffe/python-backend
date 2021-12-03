@@ -25,7 +25,7 @@ def hello():
         else:
             return f"{unicornsText}"
     elif request.method == 'POST':
-        unicorn = json_to_unicorn(request.get_json)
+        unicorn = json_to_unicorn(request.get_json())
         storage.add_unicorn(unicorn)
         return "Posted"
     else:
@@ -41,8 +41,11 @@ def unicornId(id):
         elif request.headers.get('Accept') == 'text/html':
             request.make_response 
     elif request.method == 'PUT':
+        unicorn = json_to_unicorn(request.get_json())
+        storage.update_unicorn(unicorn)
         return "Put"
     elif request.method == 'DELETE':
+        storage.delete_unicorn(id)
         return "Delete"
     else:
         return "Invalid method"
