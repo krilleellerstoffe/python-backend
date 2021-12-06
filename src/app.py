@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-import re
+from flask_cors import CORS
 from flask import Flask, jsonify, json
 from flask import request
 from flask.helpers import make_response
@@ -10,6 +9,8 @@ from unicorns import storage
 from unicorns.Unicorn import Unicorn
 
 app = Flask(__name__)
+
+CORS(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
