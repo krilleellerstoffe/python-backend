@@ -9,7 +9,7 @@ CORS(app)
 @app.route("/")
 def get_channel_list():
     # automatically GET, return a list of stations
-    response = requests.get('http://api.sr.se/api/v2/channels/?format=json&size=10')
+    response = requests.get('http://api.sr.se/api/v2/channels/?format=json&size=52')
     return response.json()
 
 @app.route("/channels/<id>")
