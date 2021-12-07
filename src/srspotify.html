@@ -19,7 +19,7 @@
                     for(i=0;i<channels_from_API['channels'].length;i++) {
                         channelID=channels_from_API['channels'][i]['id']
                         getCurrentSong(channelID)
-                        channelHtml='<li><a href="http://127.0.0.1:5000/channels/' + channelID + '/current">' + channels_from_API['channels'][i]['name'] + ' (id:' + channelID + ')</a></li>'
+                        channelHtml='<li><a href="http://127.0.0.1:5000/channels/' + channelID + '">' + channels_from_API['channels'][i]['name'] + ' (id:' + channelID + ')</a></li>'
                         channelList.append(channelHtml)
                     }
                 })
