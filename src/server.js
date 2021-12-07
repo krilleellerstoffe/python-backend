@@ -1,3 +1,5 @@
+//a simple node server that provides a response
+
 var http = require("http");
 
 http.createServer(function(request, response) {

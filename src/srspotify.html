@@ -12,14 +12,14 @@
             function updateList() {
                 //show list of channels
                 $.ajax({
-                    url: "http://api.sr.se/api/v2/channels/?format=json&size=52"
+                    url: "http://127.0.0.1:5000/"
                 }).done(function(channels_from_API) {
                     channelList = $('#channel_list')
                     channelList.empty()
                     for(i=0;i<channels_from_API['channels'].length;i++) {
                         channelID=channels_from_API['channels'][i]['id']
                         getCurrentSong(channelID)
-                        channelHtml='<li id="channel_"' + channelID + '>' + channels_from_API['channels'][i]['name'] + ' (id:' + channelID + ')</li>'
+                        channelHtml='<li><a href="http://127.0.0.1:5000/channels/' + channelID + '">' + channels_from_API['channels'][i]['name'] + ' (id:' + channelID + ')</a></li>'
                         channelList.append(channelHtml)
                     }
                 })
